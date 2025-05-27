@@ -29,7 +29,7 @@ const Navbar = () => {
             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600 transition-transform duration-300 group-hover:scale-105">
               Yelloom
             </span>
-            <span className={`text-xl font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-gray-900'}`}>
+            <span className={`text-xl font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}>
               Studio
             </span>
           </Link>
@@ -37,22 +37,22 @@ const Navbar = () => {
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-10">
             <Link href="/#services" 
-                  className={`px-2 py-1 text-sm font-medium transition-colors duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-gray-900'}`}
+                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Servicios
-              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/#about"
-                  className={`px-2 py-1 text-sm font-medium transition-colors duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-gray-900'}`}
+                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Sobre Nosotros
-              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/#portfolio"
-                  className={`px-2 py-1 text-sm font-medium transition-colors duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-gray-900'}`}
+                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Portafolio
-              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/#contact"
                   className={`ml-2 px-5 py-2 rounded-full text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:shadow`}
@@ -65,7 +65,7 @@ const Navbar = () => {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-full transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-gray-900'}`}
+              className={`p-2 rounded-full transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Menú</span>
