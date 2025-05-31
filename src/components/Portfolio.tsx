@@ -47,17 +47,17 @@ const ProjectCard = ({ title, description, category, index }: ProjectCardProps) 
       className={`group transition-all duration-700 transform ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="overflow-hidden rounded-xl border border-gray-100 hover:border-blue-200 transition-all duration-300 bg-white hover:shadow-lg h-full flex flex-col">
+      <div className="overflow-hidden rounded-xl border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 bg-gray-800/50 backdrop-blur-sm hover:bg-gray-800/70 h-full flex flex-col group">
         <div 
           className="relative h-64 w-full overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-50 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
-            {/* Ilustración abstracta */}
-            <div className="absolute w-40 h-40 bg-blue-200/50 rounded-full blur-xl transform -translate-x-10 -translate-y-10"></div>
-            <div className="absolute w-32 h-32 bg-blue-300/30 rounded-full blur-lg transform translate-x-20 translate-y-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 to-gray-900/50 flex items-center justify-center transition-all duration-500 group-hover:scale-105">
+            {/* Efectos de fondo */}
+            <div className="absolute w-40 h-40 bg-blue-500/10 rounded-full blur-xl transform -translate-x-10 -translate-y-10 group-hover:bg-blue-500/20 transition-colors duration-500"></div>
+            <div className="absolute w-32 h-32 bg-indigo-500/10 rounded-full blur-lg transform translate-x-20 translate-y-10 group-hover:bg-indigo-500/20 transition-colors duration-500"></div>
             
             {/* Íconos representativos según categoría */}
-            <div className="relative z-10 text-blue-500">
+            <div className="relative z-10 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
               {category === 'E-commerce' && (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16">
                   <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
@@ -96,16 +96,16 @@ const ProjectCard = ({ title, description, category, index }: ProjectCardProps) 
         </div>
         <div className="flex-grow p-8 flex flex-col">
           <div className="mb-3">
-            <span className="inline-block py-1 px-3 rounded-full text-xs font-medium bg-blue-50 text-blue-800 border border-blue-100">
+            <span className="inline-block py-1 px-3 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-colors duration-300">
               {category}
             </span>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{title}</h3>
-          <p className="text-gray-600 leading-relaxed flex-grow">{description}</p>
-          <div className="mt-6 pt-4 border-t border-gray-100">
+          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">{title}</h3>
+          <p className="text-gray-300 leading-relaxed flex-grow">{description}</p>
+          <div className="mt-6 pt-4 border-t border-gray-700/50 group-hover:border-blue-500/30 transition-colors duration-300">
             <Link 
               href="#" 
-              className="inline-flex items-center text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors duration-300"
+              className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors duration-300 group-hover:translate-x-1 transition-transform"
             >
               <span>Ver proyecto</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
@@ -184,16 +184,23 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="portfolio" className="relative py-24 md:py-32 bg-gray-900 overflow-hidden">
+      {/* Fondo con opacidad reducida para las partículas */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"></div>
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div 
           ref={headingRef}
           className={`transition-all duration-1000 mb-20 ${isHeadingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 max-w-xl">
-            Nuestro <span className="relative inline-block">Portafolio<span className="absolute -bottom-2 left-0 w-full h-1 bg-blue-500"></span></span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 max-w-xl">
+            Nuestro <span className="relative inline-block">Portafolio
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-yellow-300 to-yellow-600"></span>
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl">
+          <p className="text-xl text-gray-300 max-w-2xl">
             Descubre cómo hemos ayudado a nuestros clientes a alcanzar sus objetivos tecnológicos con soluciones innovadoras y efectivas.
           </p>
         </div>

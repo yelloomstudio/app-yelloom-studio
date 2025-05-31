@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ValueCard = ({ icon, title, description, index }: { icon: React.ReactNode, title: string, description: string, index: number }) => {
   const [isInView, setIsInView] = useState(false);
@@ -34,18 +34,21 @@ const ValueCard = ({ icon, title, description, index }: { icon: React.ReactNode,
   return (
     <div 
       id={`value-card-${index}`}
-      className={`transition-all duration-700 transform ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`transition-all duration-700 transform group ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="flex items-start space-x-6">
+      <div className="flex items-start space-x-6 p-6 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/30 hover:bg-gray-800/70 transition-all duration-300">
         <div className="flex-shrink-0 pt-1">
-          <div className="flex items-center justify-center h-14 w-14 rounded-full bg-blue-100 text-blue-600">
-            {icon}
+          <div className="flex items-center justify-center h-14 w-14 rounded-full bg-blue-500/10 text-blue-400 group-hover:bg-blue-500/20 transition-colors duration-300">
+            {React.isValidElement(icon) ? React.cloneElement(icon, { 
+              className: 'w-7 h-7',
+              ...(icon.props as object)
+            } as React.HTMLAttributes<HTMLElement>) : icon}
           </div>
         </div>
         <div>
-          <h4 className="text-xl font-medium text-gray-900 mb-2">{title}</h4>
-          <p className="text-gray-600 leading-relaxed">
+          <h4 className="text-xl font-medium text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">{title}</h4>
+          <p className="text-gray-300 leading-relaxed">
             {description}
           </p>
         </div>
@@ -111,20 +114,27 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-white overflow-hidden">
+    <section id="about" className="relative py-24 md:py-32 bg-gray-900 overflow-hidden">
+      {/* Fondo con opacidad reducida para las partículas */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"></div>
+      </div>
+      
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-        {/* Background element */}
-        <div className="absolute -right-64 top-0 w-96 h-96 bg-blue-50 rounded-full opacity-70 z-0"></div>
+        {/* Elemento de fondo decorativo */}
+        <div className="absolute -right-64 top-0 w-96 h-96 bg-blue-500/10 rounded-full opacity-30 z-0"></div>
         
         {/* Heading */}
         <div 
           id="about-heading"
           className={`relative z-10 mb-20 transition-all duration-1000 ${isHeadingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 max-w-xl">
-            Sobre <span className="relative inline-block">Nosotros<span className="absolute -bottom-2 left-0 w-full h-1 bg-blue-500"></span></span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 max-w-xl">
+            Sobre <span className="relative inline-block">Nosotros
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-yellow-300 to-yellow-600"></span>
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl">
+          <p className="text-xl text-gray-300 max-w-2xl">
             Yelloom Studio nace con la visión de transformar ideas en soluciones tecnológicas innovadoras
             que generan un impacto positivo en el mundo digital.
           </p>
@@ -138,10 +148,10 @@ const About = () => {
           >
             <div className="flex items-center space-x-3 mb-8">
               <span className="h-px w-8 bg-yellow-500"></span>
-              <h3 className="text-2xl font-semibold text-gray-900">Nuestra Misión</h3>
+              <h3 className="text-2xl font-semibold text-white">Nuestra Misión</h3>
             </div>
             
-            <p className="text-lg text-gray-700 mb-12 leading-relaxed">
+            <p className="text-lg text-gray-300 mb-12 leading-relaxed">
               Nuestra misión es crear soluciones tecnológicas de calidad que impulsen el éxito de nuestros clientes. 
               Nos comprometemos a entregar productos que superen expectativas, combinando la excelencia técnica con 
               una profunda comprensión de las necesidades del negocio.
@@ -191,59 +201,59 @@ const About = () => {
           >
             <div className="h-full flex flex-col">
               <div className="flex items-center space-x-3 mb-8">
-                <span className="h-px w-8 bg-blue-500"></span>
-                <h3 className="text-2xl font-semibold text-gray-900">Nuestra Visión</h3>
+                <span className="h-px w-8 bg-yellow-500"></span>
+                <h3 className="text-2xl font-semibold text-white">Nuestra Visión</h3>
               </div>
               
-              <div className="bg-gradient-to-br from-blue-50 to-gray-50 p-10 rounded-xl border border-gray-100 h-full">
-                <p className="text-lg text-gray-700 mb-10 leading-relaxed">
+              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-10 rounded-xl border border-gray-700/50 h-full backdrop-blur-sm hover:border-blue-500/30 transition-all duration-300">
+                <p className="text-lg text-gray-300 mb-10 leading-relaxed">
                   Aspiramos a ser líderes en la industria del desarrollo de software, reconocidos por nuestra capacidad para transformar 
                   desafíos complejos en soluciones elegantes y eficientes. Buscamos crear un impacto positivo en el mundo a través de la tecnología.
                 </p>
                 
-                <h4 className="text-lg font-medium text-gray-900 mb-6 flex items-center">
-                  <span className="block h-1 w-6 bg-yellow-400 mr-3"></span>
+                <h4 className="text-xl font-semibold text-white mb-6 flex items-center">
+                {/* <span className="h-px w-8 bg-yellow-500 mr-3"></span> */}
                   Lo que nos distingue
                 </h4>
                 
-                <ul className="space-y-4">
-                  <li className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 p-1">
-                      <svg className="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <ul className="space-y-5">
+                  <li className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 mt-1 p-1.5 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-colors duration-300">
+                      <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-200 leading-relaxed">
                       Equipo multidisciplinario con experiencia en diversas tecnologías
                     </p>
                   </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 p-1">
-                      <svg className="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <li className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 mt-1 p-1.5 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-colors duration-300">
+                      <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-200 leading-relaxed">
                       Metodologías ágiles para una entrega eficiente y consistente
                     </p>
                   </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 p-1">
-                      <svg className="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <li className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 mt-1 p-1.5 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-colors duration-300">
+                      <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-200 leading-relaxed">
                       Compromiso con la calidad y la mejora continua de nuestros procesos
                     </p>
                   </li>
                   <li className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 p-1">
-                      <svg className="h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <div className="flex-shrink-0 mt-1 p-1.5 bg-blue-500/10 rounded-full group-hover:bg-blue-500/20 transition-colors duration-300">
+                    <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-200">
                       Enfoque en soluciones escalables que crecen con tu negocio
                     </p>
                   </li>

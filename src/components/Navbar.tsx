@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center group">
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600 transition-transform duration-300 group-hover:scale-105">
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-700 transition-transform duration-300 group-hover:scale-105">
               Yelloom
             </span>
             <span className={`text-xl font-medium transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}>
@@ -48,12 +48,13 @@ const Navbar = () => {
               Sobre Nosotros
               <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            {/* Portafolio temporalmente deshabilitado
             <Link href="/#portfolio"
-                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-200 hover:text-white'}`}
             >
               Portafolio
-              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            */}
             <Link href="/#contact"
                   className={`ml-2 px-5 py-2 rounded-full text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:shadow`}
             >
@@ -101,13 +102,6 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Sobre Nosotros
-          </Link>
-          <Link 
-            href="/#portfolio" 
-            className="text-3xl font-light text-gray-800 hover:text-yellow-500 transition-colors duration-300"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Portafolio
           </Link>
           <Link 
             href="/#contact" 

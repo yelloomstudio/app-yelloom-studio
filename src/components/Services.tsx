@@ -41,12 +41,12 @@ const ServiceCard = ({ title, description, icon, index }: ServiceCardProps) => {
   return (
     <div 
       id={`service-card-${index}`}
-      className={`p-8 bg-white rounded-xl border border-gray-100 transition-all duration-700 transform ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+      className={`p-8 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 transition-all duration-700 transform hover:border-blue-500/30 hover:bg-gray-800/70 group ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="w-16 h-16 text-blue-500 mb-6 transition-transform duration-300 transform group-hover:rotate-3">{icon}</div>
-      <h3 className="text-2xl font-medium text-gray-800 mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <div className="w-16 h-16 text-blue-400 mb-6 transition-all duration-500 transform group-hover:rotate-6 group-hover:scale-110">{icon}</div>
+      <h3 className="text-2xl font-medium text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">{title}</h3>
+      <p className="text-gray-300 leading-relaxed">{description}</p>
     </div>
   );
 };
@@ -81,16 +81,23 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="services" className="relative py-24 md:py-32 bg-gray-900 overflow-hidden">
+      {/* Fondo con opacidad reducida para las partículas */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"></div>
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div 
           id="services-heading" 
           className={`transition-all duration-1000 mb-20 ${isHeadingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 max-w-2xl">
-            Nuestros <span className="relative inline-block">Servicios<span className="absolute -bottom-2 left-0 w-full h-1 bg-blue-500"></span></span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 max-w-2xl">
+            Nuestros <span className="relative inline-block">Servicios
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-yellow-300 to-yellow-600"></span>
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl">
+          <p className="text-xl text-gray-300 max-w-2xl">
             Ofrecemos soluciones digitales integrales para ayudar a tu negocio a crecer y destacarse en el mundo digital.
           </p>
         </div>
