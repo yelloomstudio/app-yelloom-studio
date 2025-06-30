@@ -19,7 +19,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav 
+    <nav
       className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-sm py-2 shadow-sm' : 'bg-transparent py-6'}`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -33,35 +33,34 @@ const Navbar = () => {
               Studio
             </span>
           </Link>
-          
+
           {/* Desktop menu */}
           <div className="hidden md:flex md:items-center md:space-x-10">
-            <Link href="/#services" 
-                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
+            <Link href="/#services"
+              className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Servicios
               <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/#about"
-                  className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
+              className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Sobre Nosotros
               <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            {/* Portafolio temporalmente deshabilitado
             <Link href="/#portfolio"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-200 hover:text-white'}`}
+              className={`px-2 py-1 text-sm font-medium transition-all duration-300 relative group ${isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'}`}
             >
               Portafolio
+              <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            */}
             <Link href="/#contact"
-                  className={`ml-2 px-5 py-2 rounded-full text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:shadow`}
+              className={`ml-2 px-5 py-2 rounded-full text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:shadow`}
             >
               Contacto
             </Link>
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="flex items-center md:hidden">
             <button
@@ -83,28 +82,35 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile menu overlay */}
-      <div 
+      <div
         className={`fixed inset-0 bg-white z-40 transform transition-transform duration-500 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="h-full flex flex-col justify-center items-center space-y-8 px-4 text-center">
-          <Link 
-            href="/#services" 
+          <Link
+            href="/#services"
             className="text-3xl font-light text-gray-800 hover:text-yellow-500 transition-colors duration-300"
             onClick={() => setIsMenuOpen(false)}
           >
             Servicios
           </Link>
-          <Link 
-            href="/#about" 
+          <Link
+            href="/#about"
             className="text-3xl font-light text-gray-800 hover:text-yellow-500 transition-colors duration-300"
             onClick={() => setIsMenuOpen(false)}
           >
             Sobre Nosotros
           </Link>
-          <Link 
-            href="/#contact" 
+          <Link
+            href="/#portfolio"
+            className="text-3xl font-light text-gray-800 hover:text-yellow-500 transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Portafolio
+          </Link>
+          <Link
+            href="/#contact"
             className="text-3xl font-light text-gray-800 hover:text-yellow-500 transition-colors duration-300"
             onClick={() => setIsMenuOpen(false)}
           >
