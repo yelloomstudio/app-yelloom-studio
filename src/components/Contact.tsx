@@ -134,7 +134,7 @@ const Contact = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl">
-            ¿Tienes un proyecto en mente? Cuéntanos tus ideas y te ayudaremos a hacerlas realidad con soluciones tecnológicas a medida.
+            ¿Tenés un proyecto en mente? Contanos tus ideas y te ayudamos a hacerlas realidad con soluciones tecnológicas a medida.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ const Contact = () => {
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 hover:border-blue-500/30 transition-colors duration-300">
               <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
               <span className="h-px w-8 bg-yellow-500 mr-3"></span>
-                Envíanos un mensaje
+                Envianos un mensaje
               </h3>
               
               <div className="space-y-6">
@@ -195,7 +195,7 @@ const Contact = () => {
             <div>
               <h3 className="text-lg font-medium text-white mb-4 flex items-center">
                 <span className="h-px w-4 bg-gradient-to-r from-yellow-300 to-yellow-600 mr-2"></span>
-                Síguenos
+                Seguinos
               </h3>
               <div className="flex space-x-4">
                 <a href="#" className="p-2 bg-gray-800/50 rounded-full text-gray-300 hover:text-white hover:bg-blue-500/20 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300">
@@ -246,7 +246,7 @@ const Contact = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="mb-6">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-2">Nombre completo</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
                     <input
                       type="text"
                       id="name"
@@ -260,7 +260,7 @@ const Contact = () => {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">Email</label>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                       <input
                         type="email"
                         id="email"
@@ -273,7 +273,7 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-2">Teléfono (opcional)</label>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Teléfono (opcional)</label>
                       <input
                         type="tel"
                         id="phone"
@@ -286,7 +286,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="mb-8">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-200 mb-2">Mensaje</label>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
                     <textarea
                       id="message"
                       name="message"
@@ -294,7 +294,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/80 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 text-base"
-                      placeholder="Cuéntanos sobre tu proyecto..."
+                      placeholder="Contanos sobre tu proyecto..."
                       required
                     ></textarea>
                   </div>
