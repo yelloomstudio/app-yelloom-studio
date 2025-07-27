@@ -1,4 +1,35 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Política de Privacidad",
+    description: "Conocé cómo Yelloom Studio protege y maneja tu información personal. Política de privacidad completa sobre recopilación, uso y protección de datos según la Ley 25.326 de Argentina.",
+    keywords: [
+        "política de privacidad",
+        "protección de datos",
+        "privacidad",
+        "ley 25.326",
+        "yelloom studio",
+        "datos personales"
+    ],
+    openGraph: {
+        title: "Política de Privacidad - Yelloom Studio",
+        description: "Conocé cómo Yelloom Studio protege y maneja tu información personal. Política de privacidad completa sobre recopilación, uso y protección de datos.",
+        url: "https://yelloomstudio.com/privacy-policy",
+        type: "article",
+    },
+    twitter: {
+        title: "Política de Privacidad - Yelloom Studio",
+        description: "Conocé cómo Yelloom Studio protege y maneja tu información personal. Política de privacidad completa sobre recopilación, uso y protección de datos.",
+    },
+    alternates: {
+        canonical: "/privacy-policy",
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
 
 export default function PrivacyPolicy() {
     return (

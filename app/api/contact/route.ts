@@ -1,33 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 export async function POST(request: NextRequest) {
-    try {
-        const { name, email, phone, message } = await request.json();
+  try {
+    console.log('🔍 Iniciando proceso de contacto...');
 
-        // Validación básica
-        if (!name || !email || !message) {
-            return NextResponse.json(
-                { error: 'Faltan campos requeridos' },
-                { status: 400 }
-            );
-        }
+    const { name, email, phone, message } = await request.json();
+    console.log('📝 Datos recibidos:', { name, email, phone: phone ? 'presente' : 'no', message: message ? 'presente' : 'no' });
 
-        // Configurar transporter de nodemailer con Gmail
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_APP_PASSWORD,
-            },
-        });
+    // Validación básica
+    if (!name || !email || !message) {
+      console.log('❌ Faltan campos requeridos');
+      return NextResponse.json(
+        { error: 'Faltan campos requeridos' },
+        { status: 400 }
+      );
+    }
 
-        // Configurar el email
-        const mailOptions = {
-            from: process.env.GMAIL_USER,
-            to: process.env.CONTACT_EMAIL, // Email donde querés recibir los mensajes
-            subject: `Nuevo mensaje de contacto - ${name}`,
-            html: `
+    // Validar variables de entorno
+    console.log('🔑 Verificando variables de entorno...');
+    console.log('RESEND_API_KEY presente:', !!process.env.RESEND_API_KEY);
+    console.log('CONTACT_EMAIL presente:', !!process.env.CONTACT_EMAIL);
+    console.log('CONTACT_EMAIL valor:', process.env.CONTACT_EMAIL);
+
+    if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL) {
+      console.error('❌ Variables de entorno faltantes');
+      return NextResponse.json(
+        { error: 'Error de configuración del servidor' },
+        { status: 500 }
+      );
+    }
+
+    // Inicializar Resend aquí para evitar problemas de build
+    console.log('📧 Inicializando Resend...');
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // Enviar email usando Resend
+    console.log('🚀 Enviando email...');
+    const result = await resend.emails.send({
+      from: 'onboarding@resend.dev', // Email por defecto de Resend
+      to: process.env.CONTACT_EMAIL, // Email donde querés recibir los mensajes
+      subject: `Nuevo mensaje de contacto - ${name}`,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2563eb; border-bottom: 2px solid #eab308; padding-bottom: 10px;">
             Nuevo mensaje desde Yelloom Studio
@@ -53,21 +67,22 @@ export async function POST(request: NextRequest) {
           </div>
         </div>
       `,
-        };
+    });
 
-        // Enviar el email
-        await transporter.sendMail(mailOptions);
+    console.log('✅ Email enviado exitosamente:', result);
 
-        return NextResponse.json(
-            { message: 'Email enviado correctamente' },
-            { status: 200 }
-        );
+    return NextResponse.json(
+      { message: 'Email enviado correctamente' },
+      { status: 200 }
+    );
 
-    } catch (error) {
-        console.error('Error al enviar email:', error);
-        return NextResponse.json(
-            { error: 'Error interno del servidor' },
-            { status: 500 }
-        );
-    }
+  } catch (error) {
+    console.error('💥 Error completo:', error);
+    console.error('💥 Error mensaje:', error instanceof Error ? error.message : 'Error desconocido');
+    console.error('💥 Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    return NextResponse.json(
+      { error: 'Error interno del servidor' },
+      { status: 500 }
+    );
+  }
 } 

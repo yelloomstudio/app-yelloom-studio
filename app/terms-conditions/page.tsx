@@ -1,4 +1,35 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Términos y Condiciones",
+    description: "Términos y condiciones de uso del sitio web de Yelloom Studio. Conocé nuestras políticas, responsabilidades y condiciones para el uso de nuestros servicios de desarrollo web.",
+    keywords: [
+        "términos y condiciones",
+        "términos de uso",
+        "condiciones de servicio",
+        "yelloom studio",
+        "desarrollo web",
+        "políticas"
+    ],
+    openGraph: {
+        title: "Términos y Condiciones - Yelloom Studio",
+        description: "Términos y condiciones de uso del sitio web de Yelloom Studio. Conocé nuestras políticas, responsabilidades y condiciones para el uso de nuestros servicios.",
+        url: "https://yelloomstudio.com/terms-conditions",
+        type: "article",
+    },
+    twitter: {
+        title: "Términos y Condiciones - Yelloom Studio",
+        description: "Términos y condiciones de uso del sitio web de Yelloom Studio. Conocé nuestras políticas, responsabilidades y condiciones para el uso de nuestros servicios.",
+    },
+    alternates: {
+        canonical: "/terms-conditions",
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
 
 export default function TermsConditions() {
     return (
