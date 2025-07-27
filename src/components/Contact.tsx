@@ -201,6 +201,7 @@ const Contact = () => {
               </div>
             </div>
 
+            {/* Redes sociales - comentado hasta tener las cuentas oficiales
             <div>
               <h3 className="text-lg font-medium text-white mb-4 flex items-center">
                 <span className="h-px w-4 bg-gradient-to-r from-yellow-300 to-yellow-600 mr-2"></span>
@@ -233,6 +234,7 @@ const Contact = () => {
                 </a>
               </div>
             </div>
+            */}
           </div>
 
           {/* Columna del formulario */}
