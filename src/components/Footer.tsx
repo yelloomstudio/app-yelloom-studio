@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center group">
               <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-700 transition-transform duration-300 group-hover:scale-105">
-                Yelloom 
+                Yelloom
               </span>
               <span
                 className={`text-xl font-medium transition-colors duration-300 text-white drop-shadow-lg`}
@@ -73,7 +73,7 @@ const Footer = () => {
             <ul className="space-y-3.5">
               <li>
                 <Link
-                  href="#"
+                  href="/privacy-policy"
                   className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/terms-conditions"
                   className="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group"
                 >
                   <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

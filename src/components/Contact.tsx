@@ -8,13 +8,13 @@ const Contact = () => {
     phone: '',
     message: '',
   });
-  
+
   const [isHeadingInView, setIsHeadingInView] = useState(false);
   const [isContactInfoInView, setIsContactInfoInView] = useState(false);
   const [isFormInView, setIsFormInView] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const headingRef = useRef<HTMLDivElement>(null);
   const contactInfoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ const Contact = () => {
       },
       observerOptions
     );
-    
+
     const contactInfoObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -44,7 +44,7 @@ const Contact = () => {
       },
       observerOptions
     );
-    
+
     const formObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -54,15 +54,15 @@ const Contact = () => {
       },
       observerOptions
     );
-    
+
     const currentHeadingRef = headingRef.current;
     const currentContactInfoRef = contactInfoRef.current;
     const currentFormRef = formRef.current;
-    
+
     if (currentHeadingRef) headingObserver.observe(currentHeadingRef);
     if (currentContactInfoRef) contactInfoObserver.observe(currentContactInfoRef);
     if (currentFormRef) formObserver.observe(currentFormRef);
-    
+
     return () => {
       if (currentHeadingRef) headingObserver.unobserve(currentHeadingRef);
       if (currentContactInfoRef) contactInfoObserver.unobserve(currentContactInfoRef);
@@ -81,17 +81,25 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulamos envío a servidor
+
     try {
-      // Aquí iría la lógica para enviar el formulario, por ejemplo usando un API
-      console.log('Form submitted:', formData);
-      
-      // Simulamos un delay de respuesta del servidor
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar el mensaje');
+      }
+
+      console.log('Mensaje enviado correctamente:', data);
       setIsSubmitted(true);
-      
+
       // Reset form después de un tiempo
       setTimeout(() => {
         setFormData({
@@ -103,9 +111,10 @@ const Contact = () => {
         setIsSubmitting(false);
         setIsSubmitted(false);
       }, 3000);
-      
+
     } catch (error) {
-      console.error('Error al enviar el formulario', error);
+      console.error('Error al enviar el formulario:', error);
+      alert('Error al enviar el mensaje. Por favor, intentá nuevamente.');
       setIsSubmitting(false);
     }
   };
@@ -116,15 +125,15 @@ const Contact = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm"></div>
       </div>
-      
+
       {/* Elementos decorativos de fondo */}
       <div className="absolute left-0 top-0 w-full h-full overflow-hidden z-0">
         <div className="absolute -left-64 bottom-0 w-96 h-96 bg-blue-500/10 rounded-full opacity-30 blur-xl"></div>
         <div className="absolute right-0 top-1/4 w-64 h-64 bg-indigo-500/10 rounded-full opacity-30 blur-xl"></div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div 
+        <div
           ref={headingRef}
           className={`mb-20 transition-all duration-1000 ${isHeadingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
@@ -140,17 +149,17 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Columna de información de contacto */}
-          <div 
+          <div
             ref={contactInfoRef}
             className={`transition-all duration-1000 ${isContactInfoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '200ms' }}
           >
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 hover:border-blue-500/30 transition-colors duration-300">
               <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
-              <span className="h-px w-8 bg-yellow-500 mr-3"></span>
+                <span className="h-px w-8 bg-yellow-500 mr-3"></span>
                 Envianos un mensaje
               </h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 p-2 bg-blue-500/10 rounded-full">
@@ -160,11 +169,11 @@ const Contact = () => {
                   </div>
                   <div className="ml-4">
                     <h4 className="text-lg font-medium text-white">Teléfono</h4>
-                    <p className="mt-1 text-gray-300">+54 11 1234 5678</p>
+                    <p className="mt-1 text-gray-300">+54 9 11 6592 6594</p>
                     <p className="text-sm text-gray-400">Lunes a Viernes 9:00 - 18:00</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 p-2 bg-blue-500/10 rounded-full">
                     <svg className="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -173,10 +182,10 @@ const Contact = () => {
                   </div>
                   <div className="ml-4">
                     <h4 className="text-lg font-medium text-white">Email</h4>
-                    <p className="mt-1 text-blue-400">info@yelloomstudio.com</p>
+                    <p className="mt-1 text-blue-400">contacto@yelloomstudio.com</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 p-2 bg-blue-500/10 rounded-full">
                     <svg className="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,7 +200,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-lg font-medium text-white mb-4 flex items-center">
                 <span className="h-px w-4 bg-gradient-to-r from-yellow-300 to-yellow-600 mr-2"></span>
@@ -225,9 +234,9 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Columna del formulario */}
-          <div 
+          <div
             ref={formRef}
             className={`transition-all duration-1000 ${isFormInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '400ms' }}
