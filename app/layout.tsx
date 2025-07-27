@@ -112,7 +112,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "LocalBusiness",
               name: "Yelloom Studio",
               url: "https://yelloomstudio.com",
               description: "Estudio de desarrollo especializado en sitios web modernos, aplicaciones móviles, UX/UI design, e-commerce y consultoría IT.",
@@ -130,9 +130,62 @@ export default function RootLayout({
                 // "https://linkedin.com/company/yelloom-studio",
                 // "https://instagram.com/yelloomstudio"
               ],
-              services: [
+              makesOffer: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Desarrollo Web",
+                    description: "Sitios web modernos, responsivos y optimizados para SEO"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Desarrollo de Aplicaciones",
+                    description: "Aplicaciones móviles y de escritorio personalizadas"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "UX/UI Design",
+                    description: "Experiencias de usuario intuitivas y atractivas"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "E-commerce",
+                    description: "Soluciones de comercio electrónico seguras y escalables"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Consultoría IT",
+                    description: "Asesoramiento experto para optimizar procesos tecnológicos"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Marketing Digital",
+                    description: "Estrategias digitales para aumentar la visibilidad de tu marca"
+                  }
+                }
+              ],
+              foundingDate: "2024",
+              knowsAbout: [
                 "Desarrollo Web",
-                "Desarrollo de Aplicaciones",
+                "Next.js",
+                "React",
+                "TypeScript",
                 "UX/UI Design",
                 "E-commerce",
                 "Consultoría IT",
