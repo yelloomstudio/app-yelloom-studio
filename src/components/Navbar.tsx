@@ -1,10 +1,11 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const scrollPosition = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +18,28 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Prevenir scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (isMenuOpen) {
+      // Guardar la posición actual del scroll
+      scrollPosition.current = window.pageYOffset;
+      // Solo bloquear el scroll sin mover la posición
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      // Restaurar el scroll
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      // Restaurar la posición guardada
+      window.scrollTo(0, scrollPosition.current);
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav
@@ -79,8 +102,21 @@ const Navbar = () => {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 bg-white z-40 transform transition-transform duration-500 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-0 bg-white/95 backdrop-blur-sm z-50 h-screen w-screen transform transition-transform duration-500 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
+        {/* Close button in overlay */}
+        <div className="absolute top-6 right-6 z-10">
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="p-2 rounded-full text-gray-800 hover:bg-gray-100 transition-colors duration-300"
+            aria-label="Cerrar menú"
+          >
+            <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
         <div className="h-full flex flex-col justify-center items-center space-y-8 px-4 text-center">
           <Link
             href="/#services"
